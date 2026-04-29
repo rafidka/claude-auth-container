@@ -51,7 +51,7 @@ else
     --name claude-auth-refresh \
     -v "$CLAUDE_DIR:/root/.claude" \
     -e TERM=dumb \
-    "$IMAGE_NAME" -p . --model haiku 2>/dev/null || true
+    "$IMAGE_NAME" -p . --model haiku >/dev/null 2>&1 || true
 fi
 
 echo
