@@ -31,7 +31,15 @@ done
 
 if $INTERACTIVE; then
   echo "Starting interactive Claude session for re-authentication..."
-  echo "  Log in with your Anthropic account, then type /exit to quit."
+  echo
+  echo "  ┌─────────────────────────────────────────────────────────┐"
+  echo "  │  1. Log in with your Anthropic account                 │"
+  echo "  │  2. Once you see the Claude prompt, type /exit or      │"
+  echo "  │     press Ctrl+D to quit                               │"
+  echo "  └─────────────────────────────────────────────────────────┘"
+  echo
+  read -n 1 -s -r -p "  Press any key to continue..."
+  echo
   echo
   docker run -it --rm \
     --name claude-auth-refresh \
@@ -43,7 +51,7 @@ else
     --name claude-auth-refresh \
     -v "$CLAUDE_DIR:/root/.claude" \
     -e TERM=dumb \
-    "$IMAGE_NAME" -p . --model haiku
+    "$IMAGE_NAME" -p . --model haiku 2>/dev/null || true
 fi
 
 echo
