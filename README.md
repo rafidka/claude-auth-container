@@ -15,7 +15,14 @@ plugin — without installing `claude` on your host machine.
 ```bash
 # 1. Build the image and authenticate
 ./auth.sh
+```
 
+The script will show instructions, then drop you into an interactive Claude
+Code session inside the container. **Log in with your Anthropic account, then
+type `/exit` or press `Ctrl+D` to quit.** Credentials are saved to your host
+automatically.
+
+```bash
 # 2. Add the plugin to OpenCode (if not already configured)
 #    Edit ~/.config/opencode/opencode.json:
 #    { "plugin": ["opencode-claude-auth@latest"] }
