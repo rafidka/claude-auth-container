@@ -63,8 +63,17 @@ fi
 mkdir -p "$CLAUDE_DIR"
 
 echo "Starting interactive Claude session..."
-echo "  Log in with your Anthropic account, then type /exit to quit."
 echo
+echo "  ┌─────────────────────────────────────────────────────────┐"
+echo "  │  1. Log in with your Anthropic account                 │"
+echo "  │  2. Once you see the Claude prompt, type /exit or      │"
+echo "  │     press Ctrl+D to quit                               │"
+echo "  └─────────────────────────────────────────────────────────┘"
+echo
+read -n 1 -s -r -p "  Press any key to continue..."
+echo
+echo
+
 docker run -it --rm \
   --name claude-auth-session \
   -v "$CLAUDE_DIR:/root/.claude" \
