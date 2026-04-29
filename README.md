@@ -18,9 +18,10 @@ plugin — without installing `claude` on your host machine.
 ```
 
 The script will show instructions, then drop you into an interactive Claude
-Code session inside the container. **Log in with your Anthropic account, then
-type `/exit` or press `Ctrl+D` to quit.** Credentials are saved to your host
-automatically.
+Code session inside the container. **Log in with your Anthropic account and
+choose a subscription plan (Pro/Max) — do NOT choose the API option, as this
+plugin relies on subscription credentials.** Then type `/exit` or press
+`Ctrl+D` to quit. Credentials are saved to your host automatically.
 
 ```bash
 # 2. Add the plugin to OpenCode (if not already configured)
@@ -50,21 +51,24 @@ authentication failures.
 
 ### `refresh.sh` — Token Refresh
 
-Refreshes credentials using a non-interactive haiku prompt. The
+Re-authenticates with Claude Code to refresh credentials. The
 opencode-claude-auth plugin handles most token renewals automatically via
 direct OAuth refresh — this script is only needed as a fallback.
 
+Runs an interactive session by default. Use `--quick` for a non-interactive
+attempt (unreliable if tokens are fully expired).
+
 | Flag            | Description                                         |
 | --------------- | --------------------------------------------------- |
-| `-i`, `--interactive` | Launch a full interactive session for re-auth  |
+| `-q`, `--quick` | Non-interactive refresh attempt (may not work) |
 | `-h`            | Show help                                           |
 
 ```bash
-# Non-interactive refresh (default)
+# Interactive re-authentication (default, recommended)
 ./refresh.sh
 
-# Full re-authentication if tokens are expired
-./refresh.sh --interactive
+# Non-interactive attempt (use only if tokens are still partially valid)
+./refresh.sh --quick
 ```
 
 ## How It Works
